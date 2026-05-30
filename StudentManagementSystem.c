@@ -2,16 +2,16 @@
 #include<stdlib.h>
 #include<string.h>
 
-int studentCount = 0;
+int studentCount = 0; //global counter that tracks the no. of students
 
 struct Student {
     char fullName[50];
     int roll;
     float cgpa;
-    int courseID[5];
-}st[200];
+    int courseID[5]; //each student enrolls in 5 courses
+}st[200]; //200 students can be registered
 
-// Function prototypes for each task
+//function prototypes for each task
 void addStudent();
 void findRoll();
 void findName();
@@ -68,8 +68,8 @@ int main(){
     return 0;
 }
 
-void addStudent(){
-    studentCount++;
+void addStudent(){ //add the details of the students
+    studentCount++; //details are stored from index 1
     printf("Enter the Student Details:\n");
     printf("Full Name: ");
     scanf(" %[^\n]", st[studentCount].fullName);
@@ -84,11 +84,11 @@ void addStudent(){
     printf("Student added successfully \n\n");
 }
 
-void findRoll(){
+void findRoll(){ //displays the details of a student on the basis of their unique roll number
     int x, found = 0;
     printf("Enter the roll number: ");
     scanf("%d", &x);
-    for(int j = 1; j <= studentCount; j++){
+    for(int j = 1; j <= studentCount; j++){ 
         if(x == st[j].roll){
             printf("Student Details:\n");
             printf("Name: %s\n", st[j].fullName);
@@ -107,13 +107,13 @@ void findRoll(){
 	}
 }
 
-void findName(){
+void findName(){ //displays the details of a student on the basis of their full name
     char name[50];
     int found = 0;
-    printf("Enter the name: ");
+    printf("Enter the full name: ");
     scanf(" %[^\n]", name);
     for(int j = 1; j <= studentCount; j++){
-        if(strcmp(name, st[j].fullName) == 0){
+        if(strcmp(name, st[j].fullName) == 0){ //strcmp return 0 when both strings match
             printf("Student Details:\n");
             printf("Roll Number: %d\n", st[j].roll);
             printf("CGPA: %.2f\n", st[j].cgpa);
@@ -131,7 +131,7 @@ void findName(){
     }
 }
 
-void findCourse(){
+void findCourse(){ //displays the details of all students who are enrolled in a specific course
     int id, found= 0;
     printf("Enter the course ID to find the details of students enrolled: ");
     scanf("%d", &id);
@@ -166,7 +166,7 @@ void deleteStudent(){
     for(int j = 1; j <= studentCount; j++){
         if(x == st[j].roll){
             for(int k = j; k < studentCount; k++){
-                st[k] = st[k + 1];
+                st[k] = st[k + 1]; //shifts the elements of the target lefwards to compress the gap
             }
             studentCount--;
             printf("The details of the student with roll number %d has been deleted \n\n",x);
